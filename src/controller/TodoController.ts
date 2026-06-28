@@ -12,16 +12,17 @@ export const getTodos = async (req: Request, res: Response) => {
 };
 
 export const addTodo = async (req: Request, res: Response) => {
-  const { task, completed } = req.body;
-
-  const newTask = new TodoModel({
-    task,
-    completed,
-  });
-  const savedTask = await newTask.save();
-  res.status(201).json({ message: "Task add successfully !", data: savedTask });
-
   try {
+    const { task, completed } = req.body;
+
+    const newTask = new TodoModel({
+      task,
+      completed,
+    });
+    const savedTask = await newTask.save();
+    res
+      .status(201)
+      .json({ message: "Task add successfully !", data: savedTask });
   } catch (error) {
     res.status(500).json("somthing went wrong!");
     console.log(error);
